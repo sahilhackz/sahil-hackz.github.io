@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - SAHIL HACKZ</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      padding: 30px;
+      text-shadow: 0 0 10px #00ff00;
+    }
+    input, textarea {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #111;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      border-radius: 5px;
+    }
+    button {
+      background: #00ff00;
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>SAHIL HACKZ - Admin Panel</h1>
+  <input type="text" id="title" placeholder="Video Title">
+  <input type="text" id="youtubeId" placeholder="YouTube Video ID">
+  <textarea id="description" placeholder="Video Description"></textarea>
+  <input type="text" id="link" placeholder="Visit Website Link">
+  <button onclick="uploadData()">Upload</button>
+
+  <script>
+    function uploadData() {
+      const data = {
+        title: document.getElementById("title").value,
+        youtubeId: document.getElementById("youtubeId").value,
+        description: document.getElementById("description").value,
+        link: document.getElementById("link").value
+      };
+
+      fetch("https://api.jsonbin.io/v3/b/6834bca48a456b7966a5ab58", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": "$2a$10$1rieU4zOzfdBEV1Od.ulAutSiF.VeSHq6M8NvZYNdffMP7r/WJ/he"
+        },
+        body: JSON.stringify([data])
+      })
+      .then(res => res.json())
+      .then(() => alert("Uploaded Successfully"))
+      .catch(err => alert("Error: " + err));
+    }
+  </script>
+</body>
+</html>
